@@ -1,0 +1,25 @@
+apiVersion: actions.summerwind.dev/v1alpha1
+kind: RunnerDeployment
+metadata:
+  name: my-runner-deployment
+spec:
+  template:
+    spec:
+      repository: GreysonYang-DevOps1/github-runner-public
+---
+apiVersion: actions.summerwind.dev/v1alpha1
+kind: HorizontalRunnerAutoscaler
+metadata:
+  name: my-runner-deployment-autoscaler
+spec:
+  scaleTargetRef:
+    kind: RunnerDeployment
+    # # In case the scale target is RunnerSet:
+    # kind: RunnerSet
+    name: my-runner-deployment
+  minReplicas: 1
+  maxReplicas: 6
+  metrics:
+  - type: TotalNumberOfQueuedAndInProgressWorkflowRuns
+    repositoryNames:
+    - github-runner-public
