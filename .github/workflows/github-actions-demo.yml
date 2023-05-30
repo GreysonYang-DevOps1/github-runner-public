@@ -16,5 +16,5 @@ jobs:
         run: |
           ls ${{ github.workspace }}
       - run: echo "🍏 This job's status is ${{ job.status }}."
-      - run: sleep 106
+      - run: sleep 107
       - run: echo "🍏 This job's status is ${{ job.status }}."
